@@ -1,0 +1,174 @@
+\ProvidesPackage{unn-titlepage}
+\RequirePackage{geometry}
+\RequirePackage{etoolbox}
+\newcommand*\ulfill{\mbox{}\leaders\hrule depth 2pt height -1.5pt\hfill} % similar to an underline
+% Confirm text
+
+\newcommand\Title@InstituteName{
+    \MakeUppercase{
+        МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ \\
+        РОССИЙСКОЙ ФЕДЕРАЦИИ \\
+    }
+    \vspace{1em}
+    Федеральное государственное автономное образовательное учреждение \\
+    высшего образования \\
+    <<Национальный исследовательский \\
+    Нижегородский государственный университет им. Н.И. Лобачевского>>
+}
+
+\newcommand\TitleInstituteName[1]{\renewcommand\Title@InstituteName{#1}}
+
+\newcommand*\Title@Department{%
+    Радиофизический факультет
+}
+\newcommand*\TitleDepartment[1]{\renewcommand\Title@Department{#1}}       %%  To change confirm
+
+\newcommand*\Title@Field{Радиофизика}
+\newcommand*\TitleField[1]{\renewcommand\Title@Field{#1}}       %%  To change confirm
+
+\newcommand*\Title@FieldNumber{%
+03.03.03
+}
+\newcommand*\TitleFieldNumber[1]{\renewcommand\Title@FieldNumber{#1}}       %%  To change confirm
+
+\newcommand*\Title@Specialization{Статистическая радиофизика}
+\newcommand*\TitleSpecialization[1]{\renewcommand\Title@Specialization{#1}}       %%  To change confirm
+
+\newcommand*\Title@WorkType{%
+Выпускная квалификационная работа
+}
+\newcommand*\TitleWorkType[1]{\renewcommand\Title@WorkType{#1}}       %%  To change confirm
+
+\newcommand*\Title@WorkTitle{%
+Название выпускной квалификационной работы
+}
+\newcommand*\TitleWorkTitle[1]{\renewcommand\Title@WorkTitle{#1}}       %%  To change confirm
+
+\newcommand*\Title@Confirm{%
+<<К защите допущен>>:
+}
+\newcommand*\TitleConfirm[1]{\renewcommand\Title@Confirm{#1}}       %%  To change confirm
+
+\newcommand*\Title@Boss{}
+\newcommand*\TitleBoss[1]{\renewcommand\Title@Boss{#1}}       %%  To change confirm
+
+
+\newcommand*\Title@Date{%
+2022 год
+}
+\newcommand*\TitleDate[1]{\renewcommand\Title@Date{#1}}       %%  To change confirm
+
+\newcommand*\Title@City{%
+Нижний Новгород
+}
+\newcommand*\TitleCity[1]{\renewcommand\Title@City{#1}}       %%  To change confirm
+
+\def\maketitle{\titlepage}
+
+\newcounter{cnt}
+\newcommand\addauthor[2]{%
+  \stepcounter{cnt}%
+  \csdef{post\thecnt}{#1}
+  \csdef{author\thecnt}{#2}
+}
+
+\newcommand\getauthor[1]{%
+  \csuse{post#1}
+  \csuse{author#1}
+}
+
+\newcommand\setauthor[3]{%
+  \csdef{post#1}{#2}
+  \csdef{author#1}{#3}
+}
+
+\addauthor{Зав. кафедрой статистической радиофизики  \\ и мобильных систем связи,  \\ профессор, д.ф.–м.н.}{Мальцев А.А.}
+\addauthor{Научный руководитель,  \\ профессор, д.ф.-м.н}{Мальцев А.А.}
+\addauthor{Рецензент,  \\ доцент, к.ф-м.н.}{Михеев П.В.}
+\addauthor{Консультант по технике безопасности,  \\ доцент, к.ф.-м.н.}{Клемина А.В.}
+\addauthor{Студент 2-го курса магистратуры}{Понур К.А.}
+
+% \setcounter{cnt}{0}
+
+
+% \renewcommand\addtext[1]{%
+%   \stepcounter{cnt}%
+%   \csdef{author\thecnt}{#1}
+% }
+
+% \renewcommand\gettext[1]{%
+%   \csuse{author#1}}
+
+% \addtext{Мальцев А.А.}
+% \addtext{Мальцев А.А.}
+% \addtext{Михеев П.В.}
+% \addtext{Клемина А.В.}
+% \addtext{Понур К.А.}
+
+
+\renewenvironment*{titlepage}{
+    \thispagestyle{empty}
+    \newgeometry{left=30mm,right=15mm,top=15mm,bottom=15mm,bindingoffset=0cm,headheight=15pt}
+    % \makebox[0pt][l]{%
+    %     \raisebox{-\totalheight}[0pt][0pt]{%
+    %     \hspace{-40mm}
+    %     % \vspace{-40mm}
+    %     \includegraphics{titlepage_2022}}
+    % }%
+    \begin{spacing}{1}
+    \begin{center}
+        
+        \textbf{\Title@InstituteName} % name of Institute
+        
+    \end{center}
+
+    \begin{center}
+        \Title@Department
+    \end{center}
+
+    \begin{center}
+        Направление~\Title@FieldNumber~<<\Title@Field>> \\
+        Направленность <<\Title@Specialization>>
+    \end{center}
+    \vspace{2em}
+    \begin{center}
+        \MakeUppercase{\Title@WorkType}
+    \end{center}
+
+    \begin{center}
+        \MakeUppercase{\Title@WorkTitle}
+    \end{center}
+    \vspace{1em}
+
+    % \vfill
+
+    \newcounter{i}
+    \setcounter{i}{1}
+    \begin{flushleft}
+        \Title@Confirm \vspace{2em} \\
+        \loop
+        \noindent 
+        \parbox{0.64\linewidth}{\csuse{post\thei}}  \hfill 
+        {\raggedright \makebox[2cm]{\ulfill}}
+        \parbox{0.20\linewidth}{\raggedright \csuse{author\thei}} 
+        \vspace{2em} \\
+        \ifnum \value{i}<\thecnt
+        \addtocounter{i}{1}
+        \repeat
+    \end{flushleft}
+    \vfill
+    \begin{center}
+        \Title@City\\
+        \Title@Date
+    \end{center}
+    \end{spacing}
+    
+            % \noindent \csuse{post\thei} \hfill \centering \makebox[3em]{\ulfill} \raggedright \csuse{author\thei} \hfill \vspace{1em} \\
+
+
+
+    
+    % \addtocounter{cnt}{-1}
+
+    % \noindent \gettext{\thei} \thei/\thecnt \newline
+}{}
