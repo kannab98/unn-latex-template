@@ -1,0 +1,94 @@
+{
+    "latex-workshop.latex.recipes": [    
+        {
+            "name": "pdflatex",
+            "tools": [
+                "pdflatex",
+            ]
+        },
+        {
+            "name": "lualatex",
+            "tools": [
+                "lualatex",
+            ]
+        },
+        {
+            "name": "makeindex",
+            "tools": [
+                "makeindex",
+            ]
+        },
+        {
+            "name": "lualatex-biber-lualatex-lualatex",
+            "tools": [
+                "lualatex",
+                "biber",
+                "lualatex",
+                "lualatex",
+            ]
+        },
+        {
+            "name": "pdflatex-biber-pdflatex-pdflatex",
+            "tools": [
+                "pdflatex",
+                "biber",
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+        
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "--output-directory=%OUTDIR%",
+                "%DOCFILE%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-output-directory=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "lualatex",
+            "command": "lualatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-output-directory=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        { 
+            "name": "makeindex",
+            "command": "makeindex",
+            "args": [
+                "%DOCFILE%.nlo",
+                "-s",
+                "nomencl.ist",
+                "-o",
+                "%DOCFILE%.nls"
+            ]
+        }
+    ],
+    "latex-workshop.hover.preview.newcommand.parseTeXFile.enabled" : true,
+    "latex-workshop.hover.preview.mathjax.extensions": ["physics", "amscd"],
+    
+    "ltex.additionalRules.languageModel": "ru-RU",
+    "ltex.additionalRules.motherTongue": "ru-RU",
+    "ltex.additionalRules.enablePickyRules": true,
+    "ltex.language": "ru-RU",
+}
